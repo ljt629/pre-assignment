@@ -13,7 +13,7 @@ public interface BoardService {
 	public BoardVO read(Integer bno) throws Exception;
 
 	// 글 수정
-	public void modify(BoardVO board) throws Exception;
+	public boolean modify(BoardVO board) throws Exception;
 
 	// 글 삭제
 	public void remove(Integer bno) throws Exception;

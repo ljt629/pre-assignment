@@ -5,14 +5,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.nhnent.controller.BoardController;
 import com.nhnent.domain.BoardVO;
 import com.nhnent.persistence.BoardDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@Inject
 	private BoardDAO dao;
 
@@ -42,19 +48,28 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	/**
-	 * 글 수정하기
+	 * 글 수정하기.
 	 *
 	 * @param board
 	 *            수정할 글
 	 * @return
 	 */
-	public void modify(BoardVO board) throws Exception {
+	public boolean modify(BoardVO board) throws Exception {
 		
 		// 수정 날짜를 현재 시간으로 설정 
 		board.setUpdated_at(new Date());
 		
-		// DAO - Update
-		dao.update(board);
+		// 비밀번호가 맞는지 확인 
+		String originalPassword = dao.read(board.getBno()).getPassword();
+		if(board.getPassword().equals(originalPassword)) {
+			
+			dao.update(board);
+			return true;
+		}
+		else {
+			
+			return false;
+		}
 	}
 
 	@Override

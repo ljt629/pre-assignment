@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  <select id="read" resultType="com.nhnent.domain.BoardVO">
  select 
-   bno, title, content, writer, created_at, updated_at, viewcnt 
+   bno, title, password, content, writer, created_at, updated_at, viewcnt 
  from 
    tbl_board 
  where bno = #{bno}
