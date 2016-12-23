@@ -31,7 +31,7 @@
 								name="writer" class="form-control" placeholder="Enter Writer Email">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Password</label> <input type="text"
+							<label for="exampleInputEmail1">Password</label> <input type="password"
 								name="password" class="form-control" placeholder="Enter Password">
 						</div>
 					</div>

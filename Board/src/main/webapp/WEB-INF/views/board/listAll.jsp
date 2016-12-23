@@ -26,7 +26,7 @@
 							<th>WRITER</th>
 							<th>CREATED_DATE</th>
 							<th>UPDATED_DATE</th>
-							<th style="width: 40px">VIEWCNT</th>
+<!-- 							<th style="width: 40px">VIEWCNT</th> -->
 						</tr>
 
 
@@ -40,7 +40,7 @@
 										value="${boardVO.created_at}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.updated_at}" /></td>
-								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>
+								<%-- <td><span class="badge bg-red">${boardVO.viewcnt }</span></td> --%>
 							</tr>
 
 						</c:forEach>
@@ -49,7 +49,19 @@
 
 				</div>
 				<!-- /.box-body -->
-				<div class="box-footer">Footer</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary">WRITE</button>
+				</div>
+				
+				<script>
+					$(document).ready(function() {
+
+						$(".btn btn-primary").on("click", function() {
+							self.location = "/board/register"; 
+						});
+
+					});
+				</script>
 				<!-- /.box-footer-->
 			</div>
 		</div>
@@ -63,11 +75,13 @@
 <!-- /.content-wrapper -->
 
 <script>
+
 	var result = '${msg}';
 
 	if (result == 'SUCCESS') {
 		alert("처리가 완료되었습니다.");
 	}
+	
 </script>
 
 <%@include file="../include/footer.jsp"%>
