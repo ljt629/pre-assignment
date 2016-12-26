@@ -52,7 +52,7 @@
 						var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 						if (exptext.test(email) == false) {
 										
-							alert("이메일 형식이 올바르지 않습니다.1");
+							alert("이메일 형식이 올바르지 않습니다.");
 							/* document.addjoin.email.focus(); */
 							return false;
 						}
@@ -73,5 +73,15 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<script>
+
+	var result = '${msg}';
+
+	if (result == 'INVALID_EMAIL') {
+		alert("이메일 형식이 올바르지 않습니다.");
+	}
+	
+</script>
 
 <%@include file="../include/footer.jsp"%>

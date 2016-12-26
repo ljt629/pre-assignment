@@ -14,10 +14,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nhnent.domain.BoardVO;
 import com.nhnent.service.BoardService;
+import com.nhnent.util.StringUtil;
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
+	
+	// 상수
+	private final String PASSWORD_NOT_EQUAL		=	"PASSWORD_NOT_EQUAL";
+	private final String SUCCESS				=	"SUCCESS";
+	private final String INVALID_EMAIL 			=	"INVALID_EMAIL";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -32,15 +38,27 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+	public String registPOST(BoardVO board, RedirectAttributes rttr, Model model) throws Exception {
 
 		logger.info("regist post ...........");
 		logger.info(board.toString());
-
-		service.regist(board);
-
-		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/board/listAll";
+		
+		// 이메일 유효성 체크 
+		boolean isValidEmail = StringUtil.isValidEmail(board.getWriter());
+		
+		// 이메일이 유효하다면 
+		if(isValidEmail) {
+			
+			service.regist(board);
+			rttr.addFlashAttribute("msg", SUCCESS);
+			return "redirect:/board/listAll";
+		}
+		// 유효하지 않다면
+		else {
+			
+			model.addAttribute("msg", INVALID_EMAIL);
+			return "/board/register";
+		}
 	}
 
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
@@ -61,7 +79,7 @@ public class BoardController {
 
 		service.remove(bno);
 
-		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("msg", SUCCESS);
 
 		return "redirect:/board/listAll";
 	}
@@ -80,14 +98,14 @@ public class BoardController {
 		// 글 수정 성공
 		if(service.modify(board)) {
 			
-			rttr.addFlashAttribute("msg", "SUCCESS");
+			rttr.addFlashAttribute("msg", SUCCESS);
 			return "redirect:/board/listAll";
 		}
 		
 		// 글 수정 실패 
 		else {
 			
-			model.addAttribute("msg", "PASSWORD_NOT_EQUAL");
+			model.addAttribute("msg", PASSWORD_NOT_EQUAL);
 			return "/board/modify";
 		}
 	}
