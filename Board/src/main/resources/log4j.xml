@@ -11,9 +11,16 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.nhnent.board">
+	<logger name="com.nhnent.controller">
 		<level value="info" />
 	</logger>
+	<logger name="com.nhnent.persistence">
+		<level value="info" />
+	</logger>
+	<logger name="com.nhnent.service">
+		<level value="info" />
+	</logger>
+	
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
