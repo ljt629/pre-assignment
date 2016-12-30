@@ -26,7 +26,7 @@
 							<th>WRITER</th>
 							<th>CREATED_DATE</th>
 							<th>UPDATED_DATE</th>
-<!-- 							<th style="width: 40px">VIEWCNT</th> -->
+							<!-- 							<th style="width: 40px">VIEWCNT</th> -->
 						</tr>
 
 
@@ -50,17 +50,16 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<button type="submit" class="btn btn-primary">WRITE</button>
+					<button type="submit" class="btn btn-primary"
+						onclick="write_btn_click();">WRITE</button>
+
 				</div>
-				
+
 				<script>
-					$(document).ready(function() {
+					function write_btn_click() {
 
-						$(".btn btn-primary").on("click", function() {
-							self.location = "/board/register"; 
-						});
-
-					});
+						self.location = "/board/register";
+					}
 				</script>
 				<!-- /.box-footer-->
 			</div>
@@ -75,13 +74,11 @@
 <!-- /.content-wrapper -->
 
 <script>
-
 	var result = '${msg}';
 
 	if (result == 'SUCCESS') {
 		alert("처리가 완료되었습니다.");
 	}
-	
 </script>
 
 <%@include file="../include/footer.jsp"%>
